@@ -1,0 +1,20 @@
+<template>
+  <div>
+    <FishForm />
+    <nuxt-link to="/">Kembali ke Daftar Ikan</nuxt-link>
+  </div>
+</template>
+
+<script>
+import FishForm from '~/components/FishForm.vue'
+
+export default {
+  components: {
+    FishForm
+  }
+}
+</script>
+
+<style scoped>
+/* Tambahkan gaya yang diinginkan */
+</style>

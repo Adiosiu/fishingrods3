@@ -1,0 +1,26 @@
+<template>
+  <div>
+    <h1>Daftar Ikan</h1>
+    <ul>
+      <li v-for="(fish, index) in fishList" :key="index">
+        <strong>Nama:</strong> {{ fish.name }} <br>
+        <strong>Habitat:</strong> {{ fish.habitat }} <br>
+        <strong>Umpan/Makanan:</strong> {{ fish.food }} <br>
+      </li>
+    </ul>
+  </div>
+</template>
+
+<script>
+export default {
+  computed: {
+    fishList() {
+      return this.$store.state.fish
+    }
+  }
+}
+</script>
+
+<style scoped>
+/* Tambahkan gaya yang diinginkan */
+</style>

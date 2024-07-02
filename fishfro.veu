@@ -1,0 +1,42 @@
+<template>
+  <form @submit.prevent="addFish">
+    <div>
+      <label for="name">Nama Ikan:</label>
+      <input type="text" v-model="fish.name" required />
+    </div>
+    <div>
+      <label for="habitat">Habitat:</label>
+      <input type="text" v-model="fish.habitat" required />
+    </div>
+    <div>
+      <label for="food">Umpan/Makanan:</label>
+      <input type="text" v-model="fish.food" required />
+    </div>
+    <button type="submit">Tambah Ikan</button>
+  </form>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      fish: {
+        name: '',
+        habitat: '',
+        food: ''
+      }
+    }
+  },
+  methods: {
+    addFish() {
+      this.$store.dispatch('addFish', this.fish)
+      this.fish = { name: '', habitat: '', food: '' }
+      this.$router.push('/')
+    }
+  }
+}
+</script>
+
+<style scoped>
+/* Tambahkan gaya yang diinginkan */
+</style>
