@@ -1,7 +1,7 @@
 <template>
     <div id="app">
       <header>
-        <h1>Informasi Ikan</h1>
+        <h1>Fishing Rod</h1>
       </header>
       <main>
         <div v-if="showAddForm">
