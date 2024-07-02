@@ -8,12 +8,12 @@
         <div v-if="showAddForm">
           <h2>Tambah Ikan Baru</h2>
           <form @submit.prevent="addFish">
-            <label for="name">Nama Ikan:</label>
-            <input type="text" id="name" v-model="newFish.name" required>
+            <label for="nama">Nama Ikan:</label>
+            <input type="text" id="nama" v-model="newFish.nama" required>
             <label for="habitat">Habitat:</label>
             <input type="text" id="habitat" v-model="newFish.habitat" required>
-            <label for="food">Umpan/Makanan:</label>
-            <input type="text" id="food" v-model="newFish.food" required>
+            <label for="pakan">Umpan/Makanan:</label>
+            <input type="text" id="pakan" v-model="newFish.pakan" required>
             <button type="submit">Tambahkan</button>
           </form>
         </div>
@@ -22,9 +22,9 @@
           <h2>Daftar Ikan</h2>
           <ul>
             <li v-for="(fish, index) in fishList" :key="index">
-              <h3>{{ fish.name }}</h3>
+              <h3>{{ fish.nama }}</h3>
               <p><strong>Habitat:</strong> {{ fish.habitat }}</p>
-              <p><strong>Umpan/Makanan:</strong> {{ fish.food }}</p>
+              <p><strong>Umpan/Makanan:</strong> {{ fish.pakan }}</p>
             </li>
           </ul>
         </div>
@@ -39,14 +39,14 @@
   
   <script>
   export default {
-    name: 'App',
+    nama: 'App',
     data() {
       return {
         showAddForm: false,
         newFish: {
-          name: '',
+          nama: '',
           habitat: '',
-          food: ''
+          pakan: ''
         },
         fishList: [
           { nama: 'Ikan Nemo', habitat: 'Lautan tropis', pakan: 'Plankton' },
@@ -61,9 +61,9 @@
       },
       addFish() {
         this.fishList.push({
-          nama: this.newFish.name,
+          nama: this.newFish.nama,
           habitat: this.newFish.habitat,
-          pakan: this.newFish.food
+          pakan: this.newFish.pakan
         });
         this.newFish.nama = '';
         this.newFish.habitat = '';
