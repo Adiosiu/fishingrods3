@@ -1,5 +1,7 @@
 <template>
   <div>
-    <h1>on progres please wait</h1>
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
   </div>
 </template>
