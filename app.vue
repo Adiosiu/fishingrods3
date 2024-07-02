@@ -1,5 +1,19 @@
 <template>
   <div>
-    <h1>on progres please wait</h1>
+    my-nuxt-fish-app/
+├── assets/
+├── components/
+│   ├── FishForm.vue
+│   └── FishList.vue
+├── layouts/
+├── pages/
+│   ├── index.vue
+│   └── add-fish.vue
+├── static/
+├── store/
+│   └── index.js
+├── nuxt.config.js
+└── package.json
+
   </div>
 </template>
