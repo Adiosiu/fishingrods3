@@ -2,7 +2,7 @@
 <template>
     <div id="app">
       <header>
-        <h1>Informasi Ikan</h1>
+        <h1>Fishing Rod</h1>
       </header>
       <main>
         <div v-if="showAddForm">
@@ -49,8 +49,9 @@
           food: ''
         },
         fishList: [
-          { name: 'Ikan Nemo', habitat: 'Lautan tropis', food: 'Plankton' },
-          { name: 'Ikan Koi', habitat: 'Kolam taman', food: 'Pelet ikan' }
+          { nama: 'Ikan Nemo', habitat: 'Lautan tropis', pakan: 'Plankton' },
+          { nama: 'Ikan Koi', habitat: 'Kolam taman', pakan: 'Pelet ikan' },
+          { nama: 'Ikan Cupang', habitat: 'Air Tawar', pakan: 'Pelet, cacing'}
         ]
       };
     },
@@ -60,13 +61,13 @@
       },
       addFish() {
         this.fishList.push({
-          name: this.newFish.name,
+          nama: this.newFish.name,
           habitat: this.newFish.habitat,
-          food: this.newFish.food
+          pakan: this.newFish.food
         });
-        this.newFish.name = '';
+        this.newFish.nama = '';
         this.newFish.habitat = '';
-        this.newFish.food = '';
+        this.newFish.pakan = '';
         this.showAddForm = false;
       }
     }
