@@ -41,7 +41,7 @@
                 <input type="text" id="editPakan" v-model="editFishData.pakan" required>
                 <label for="editGambar">URL Gambar:</label>
                 <input type="text" id="editGambar" v-model="editFishData.gambar" required>
-                <button type="submit">Simpan</button>
+                <button type="submit"@click="saveEdit">Simpan</button>
                 <button type="button" @click="cancelEdit">Batal</button>
               </form>
             </div>
