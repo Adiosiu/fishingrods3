@@ -25,7 +25,7 @@
             <h3>{{ fish.nama }}</h3>
             <p><strong>Habitat:</strong> {{ fish.habitat }}</p>
             <p><strong>Umpan/Makanan:</strong> {{ fish.pakan }}</p>
-            <button @click="deleteFish(index)">Hapus</button>
+            <button @click="deleteFish(fish.id)">Hapus</button>
           </li>
         </ul>
       </div>
@@ -39,6 +39,8 @@
 </template>
 
 <script>
+import { db } from './firebaseConfig';
+
 export default {
   name: 'App',
   data() {
@@ -59,37 +61,25 @@ export default {
     toggleAddForm() {
       this.showAddForm = !this.showAddForm;
     },
-    addFish() {
-      this.fishList.push({
+    async addFish() {
+      const docRef = await db.collection('fish').add({
         nama: this.newFish.nama,
         habitat: this.newFish.habitat,
         pakan: this.newFish.pakan
       });
+      this.fishList.push({ id: docRef.id, ...this.newFish });
       this.newFish.nama = '';
       this.newFish.habitat = '';
       this.newFish.pakan = '';
       this.showAddForm = false;
-      this.saveFishList();
     },
-    deleteFish(index) {
-      this.fishList.splice(index, 1);
-      this.saveFishList();
+    async deleteFish(id) {
+      await db.collection('fish').doc(id).delete();
+      this.fishList = this.fishList.filter(fish => fish.id !== id);
     },
-    saveFishList() {
-      localStorage.setItem('fishList', JSON.stringify(this.fishList));
-    },
-    loadFishList() {
-      const fishListData = localStorage.getItem('fishList');
-      if (fishListData) {
-        this.fishList = JSON.parse(fishListData);
-      } else {
-        // Jika tidak ada data di Local Storage, tambahkan data default
-        this.fishList = [
-          { nama: 'Ikan Nemo', habitat: 'Lautan tropis', pakan: 'Plankton' },
-          { nama: 'Ikan Koi', habitat: 'Kolam taman', pakan: 'Pelet ikan' },
-          { nama: 'Ikan Cupang', habitat: 'Air Tawar', pakan: 'Pelet, cacing'}
-        ];
-      }
+    async loadFishList() {
+      const snapshot = await db.collection('fish').get();
+      this.fishList = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
     }
   }
 };
