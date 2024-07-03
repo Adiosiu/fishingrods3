@@ -65,6 +65,7 @@
       addFish() {
         this.fishList.push({
           nama: this.newFish.nama,
+          Image: this.handleImageUpload,
           habitat: this.newFish.habitat,
           pakan: this.newFish.pakan
         });
