@@ -87,18 +87,22 @@ export default {
       this.showAddForm = !this.showAddForm;
     },
     addFish() {
-      this.fishList.push({
-        nama: this.newFish.nama,
-        habitat: this.newFish.habitat,
-        pakan: this.newFish.pakan,
-        gambar: this.newFish.gambar
-      });
-      this.newFish.nama = '';
-      this.newFish.habitat = '';
-      this.newFish.pakan = '';
-      this.newFish.gambar = '';
-      this.showAddForm = false;
-      this.saveFishList();
+      if (this.newFish.nama && this.newFish.habitat && this.newFish.pakan && this.newFish.gambar) {
+        this.fishList.push({
+          nama: this.newFish.nama,
+          habitat: this.newFish.habitat,
+          pakan: this.newFish.pakan,
+          gambar: this.newFish.gambar
+        });
+        this.newFish.nama = '';
+        this.newFish.habitat = '';
+        this.newFish.pakan = '';
+        this.newFish.gambar = '';
+        this.showAddForm = false;
+        this.saveFishList();
+      } else {
+        alert('Silakan lengkapi semua informasi sebelum menambahkan ikan baru.');
+      }
     },
     deleteFish(index) {
       this.fishList.splice(index, 1);
@@ -110,9 +114,13 @@ export default {
     },
     updateFish() {
       if (this.editIndex !== null) {
-        this.$set(this.fishList, this.editIndex, { ...this.editFishData });
-        this.editIndex = null;
-        this.saveFishList();
+        if (this.editFishData.nama && this.editFishData.habitat && this.editFishData.pakan && this.editFishData.gambar) {
+          this.$set(this.fishList, this.editIndex, { ...this.editFishData });
+          this.editIndex = null;
+          this.saveFishList();
+        } else {
+          alert('Silakan lengkapi semua informasi sebelum menyimpan perubahan.');
+        }
       }
     },
     cancelEdit() {
@@ -127,9 +135,9 @@ export default {
         this.fishList = JSON.parse(fishListData);
       } else {
         this.fishList = [
-          { nama: 'Ikan Nemo', habitat: 'Lautan tropis', pakan: 'Plankton', gambar: ''},
-          { nama: 'Ikan Koi', habitat: 'Kolam taman', pakan: 'Pelet ikan', gambar: '' },
-          { nama: 'Ikan Cupang', habitat: 'Air Tawar', pakan: 'Pelet, cacing', gambar: ''}
+          { nama: 'Ikan Nemo', habitat: 'Lautan tropis', pakan: 'Plankton', gambar: 'https://images.tokopedia.net/img/cache/700/VqbcmM/2023/10/26/5654b3fe-3a54-411e-a90f-cba0ef747ac1.jpg' },
+          { nama: 'Ikan Koi', habitat: 'Kolam taman', pakan: 'Pelet ikan', gambar: 'https://cdn0-production-images-kly.akamaized.net/0NEVm7q77gaTWbhGFzCJSpRJXbs=/1200x900/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/1242664/original/9abf62bdff3197a1fd1eb7e3892a6965-056377500_1464018369-ikan_koi_3.jpg' },
+          { nama: 'Ikan Cupang', habitat: 'Air Tawar', pakan: 'Pelet, cacing', gambar: 'https://asset.kompas.com/crops/GOGE5UVQJ-kX5EkpxiXgGTRXt_E=/19x61:898x647/750x500/data/photo/2020/11/20/5fb73ab6933c4.jpg'}
         ];
       }
     }
