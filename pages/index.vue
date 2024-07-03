@@ -14,6 +14,8 @@
           <input type="text" id="habitat" v-model="newFish.habitat" required>
           <label for="pakan">Umpan/Makanan:</label>
           <input type="text" id="pakan" v-model="newFish.pakan" required>
+          <label for="gambar">URL Gambar:</label>
+          <input type="text" id="gambar" v-model="newFish.gambar" required>
           <button type="submit">Tambahkan</button>
         </form>
       </div>
@@ -23,6 +25,7 @@
         <ul>
           <li v-for="(fish, index) in fishList" :key="index">
             <h3>{{ fish.nama }}</h3>
+            <img :src="fish.gambar" alt="Gambar Ikan" v-if="fish.gambar">
             <p><strong>Habitat:</strong> {{ fish.habitat }}</p>
             <p><strong>Umpan/Makanan:</strong> {{ fish.pakan }}</p>
             <button @click="deleteFish(index)">Hapus</button>
@@ -47,7 +50,8 @@ export default {
       newFish: {
         nama: '',
         habitat: '',
-        pakan: ''
+        pakan: '',
+        gambar: '' // Menambahkan field untuk URL gambar
       },
       fishList: []
     };
@@ -63,11 +67,13 @@ export default {
       this.fishList.push({
         nama: this.newFish.nama,
         habitat: this.newFish.habitat,
-        pakan: this.newFish.pakan
+        pakan: this.newFish.pakan,
+        gambar: this.newFish.gambar // Menyimpan URL gambar
       });
       this.newFish.nama = '';
       this.newFish.habitat = '';
       this.newFish.pakan = '';
+      this.newFish.gambar = ''; // Mengosongkan field gambar setelah menambahkan ikan
       this.showAddForm = false;
       this.saveFishList();
     },
@@ -83,11 +89,11 @@ export default {
       if (fishListData) {
         this.fishList = JSON.parse(fishListData);
       } else {
-        // Jika tidak ada data di Local Storage, tambahkan data default
+        // Jika tidak ada data di Local Storage, tambahkan data default dengan gambar
         this.fishList = [
-          { nama: 'Ikan Nemo', habitat: 'Lautan tropis', pakan: 'Plankton' },
-          { nama: 'Ikan Koi', habitat: 'Kolam taman', pakan: 'Pelet ikan' },
-          { nama: 'Ikan Cupang', habitat: 'Air Tawar', pakan: 'Pelet, cacing'}
+          { nama: 'Ikan Nemo', habitat: 'Lautan tropis', pakan: 'Plankton', gambar: 'https://link-to-nemo-image.com' },
+          { nama: 'Ikan Koi', habitat: 'Kolam taman', pakan: 'Pelet ikan', gambar: 'https://link-to-koi-image.com' },
+          { nama: 'Ikan Cupang', habitat: 'Air Tawar', pakan: 'Pelet, cacing', gambar: 'https://link-to-cupang-image.com'}
         ];
       }
     }
@@ -97,4 +103,8 @@ export default {
 
 <style>
 /* CSS styling can be added here */
+img {
+  max-width: 100%;
+  height: auto;
+}
 </style>
