@@ -20,37 +20,38 @@
         </form>
       </div>
 
-      <div v-if="fishList.length > 0">
-        <h2>Daftar Ikan</h2>
-        <ul>
-          <li v-for="(fish, index) in fishList" :key="index">
-            <h3>{{ fish.nama }}</h3>
-            <img :src="fish.gambar" alt="Gambar Ikan" v-if="fish.gambar">
-            <p><strong>Habitat:</strong> {{ fish.habitat }}</p>
-            <p><strong>Umpan/Makanan:</strong> {{ fish.pakan }}</p>
-            <button @click="editFish(index)">Edit</button>
-            <button @click="deleteFish(index)">Hapus</button>
-            <div v-if="editIndex === index">
-              <h3>Edit Ikan</h3>
-              <form @submit.prevent="updateFish">
-                <label for="editNama">Nama Ikan:</label>
-                <input type="text" id="editNama" v-model="editFishData.nama" required>
-                <label for="editHabitat">Habitat:</label>
-                <input type="text" id="editHabitat" v-model="editFishData.habitat" required>
-                <label for="editPakan">Umpan/Makanan:</label>
-                <input type="text" id="editPakan" v-model="editFishData.pakan" required>
-                <label for="editGambar">URL Gambar:</label>
-                <input type="text" id="editGambar" v-model="editFishData.gambar" required>
-                <button type="submit">Simpan</button>
-                <button type="button" @click="cancelEdit">Batal</button>
-              </form>
-            </div>
-          </li>
-        </ul>
+<div v-if="fishList.length > 0">
+  <h2>Daftar Ikan</h2>
+  <ul>
+    <li v-for="(fish, index) in fishList" :key="index">
+      <h3>{{ fish.nama }}</h3>
+      <img :src="fish.gambar" alt="Gambar Ikan" v-if="fish.gambar">
+      <p><strong>Habitat:</strong> {{ fish.habitat }}</p>
+      <p><strong>Umpan/Makanan:</strong> {{ fish.pakan }}</p>
+      <button @click="editFish(index)">Edit</button>
+      <button @click="deleteFish(index)">Hapus</button>
+      <div v-if="editIndex === index">
+        <h3>Edit Ikan</h3>
+        <form @submit.prevent="updateFish(index)">
+          <label for="editNama">Nama Ikan:</label>
+          <input type="text" id="editNama" v-model="editFishData.nama" required>
+          <label for="editHabitat">Habitat:</label>
+          <input type="text" id="editHabitat" v-model="editFishData.habitat" required>
+          <label for="editPakan">Umpan/Makanan:</label>
+          <input type="text" id="editPakan" v-model="editFishData.pakan" required>
+          <label for="editGambar">URL Gambar:</label>
+          <input type="text" id="editGambar" v-model="editFishData.gambar" required>
+          <button type="submit">Simpan</button>
+          <button type="button" @click="cancelEdit">Batal</button>
+        </form>
       </div>
-      <div v-else>
-        <p>Tidak ada data ikan.</p>
-      </div>
+    </li>
+  </ul>
+</div>
+<div v-else>
+  <p>Tidak ada data ikan.</p>
+</div>
+
 
       <button @click="toggleAddForm">Tambah Ikan Baru</button>
     </main>
