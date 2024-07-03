@@ -25,6 +25,7 @@
             <h3>{{ fish.nama }}</h3>
             <p><strong>Habitat:</strong> {{ fish.habitat }}</p>
             <p><strong>Umpan/Makanan:</strong> {{ fish.pakan }}</p>
+            <button @click="deleteFish(index)">Hapus</button>
           </li>
         </ul>
       </div>
@@ -68,6 +69,10 @@ export default {
       this.newFish.habitat = '';
       this.newFish.pakan = '';
       this.showAddForm = false;
+      this.saveFishList();
+    },
+    deleteFish(index) {
+      this.fishList.splice(index, 1);
       this.saveFishList();
     },
     saveFishList() {
