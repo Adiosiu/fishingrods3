@@ -17,6 +17,7 @@
           <label for="gambar">URL Gambar:</label>
           <input type="text" id="gambar" v-model="newFish.gambar" required>
           <button type="submit">Tambahkan</button>
+          <button type="button" @click="cancelAdd">Batal</button>
         </form>
       </div>
 
@@ -59,7 +60,7 @@
 
 <script>
 export default {
-  name: 'App',
+  name: 'FishCard',
   data() {
     return {
       showAddForm: false,
@@ -70,8 +71,8 @@ export default {
         gambar: ''
       },
       fishList: [],
-      editIndex: null, // Indeks ikan yang sedang diedit
-      editFishData: { // Data ikan yang sedang diedit
+      editIndex: null,
+      editFishData: {
         nama: '',
         habitat: '',
         pakan: '',
@@ -86,6 +87,10 @@ export default {
     toggleAddForm() {
       this.showAddForm = !this.showAddForm;
     },
+    cancelAdd() {
+      this.showAddForm = false;
+      this.resetNewFish();
+    },
     addFish() {
       if (this.newFish.nama && this.newFish.habitat && this.newFish.pakan && this.newFish.gambar) {
         this.fishList.push({
@@ -94,19 +99,12 @@ export default {
           pakan: this.newFish.pakan,
           gambar: this.newFish.gambar
         });
-        this.newFish.nama = '';
-        this.newFish.habitat = '';
-        this.newFish.pakan = '';
-        this.newFish.gambar = '';
-        this.showAddForm = false;
         this.saveFishList();
+        this.resetNewFish();
+        this.showAddForm = false;
       } else {
         alert('Silakan lengkapi semua informasi sebelum menambahkan ikan baru.');
       }
-    },
-    deleteFish(index) {
-      this.fishList.splice(index, 1);
-      this.saveFishList();
     },
     editFish(index) {
       this.editIndex = index;
@@ -116,8 +114,8 @@ export default {
       if (this.editIndex !== null) {
         if (this.editFishData.nama && this.editFishData.habitat && this.editFishData.pakan && this.editFishData.gambar) {
           this.$set(this.fishList, this.editIndex, { ...this.editFishData });
-          this.editIndex = null;
           this.saveFishList();
+          this.editIndex = null;
         } else {
           alert('Silakan lengkapi semua informasi sebelum menyimpan perubahan.');
         }
@@ -125,6 +123,16 @@ export default {
     },
     cancelEdit() {
       this.editIndex = null;
+    },
+    deleteFish(index) {
+      this.fishList.splice(index, 1);
+      this.saveFishList();
+    },
+    resetNewFish() {
+      this.newFish.nama = '';
+      this.newFish.habitat = '';
+      this.newFish.pakan = '';
+      this.newFish.gambar = '';
     },
     saveFishList() {
       localStorage.setItem('fishList', JSON.stringify(this.fishList));
