@@ -47,6 +47,7 @@
         showAddForm: false,
         newFish: {
           nama: '',
+          Image: '',
           habitat: '',
           pakan: ''
         },
