@@ -14,6 +14,8 @@
             <input type="text" id="habitat" v-model="newFish.habitat" required>
             <label for="pakan">Umpan/Makanan:</label>
             <input type="text" id="pakan" v-model="newFish.pakan" required>
+            <label for="image">Gambar Ikan:</label>
+            <input type="file" id="image" @change="handleImageUpload" required>
             <button type="submit">Tambahkan</button>
           </form>
         </div>
@@ -47,6 +49,7 @@
           nama: '',
           habitat: '',
           pakan: ''
+          image: '' // Add image property
         },
         fishList: [
           { nama: 'Ikan Nemo', habitat: 'Lautan tropis', pakan: 'Plankton' },
@@ -58,6 +61,16 @@
     methods: {
       toggleAddForm() {
         this.showAddForm = !this.showAddForm;
+      },
+    handleImageUpload(event) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        this.newFish.image = e.target.result;
+      };
+
+      reader.readAsDataURL(file);
       },
       addFish() {
         this.fishList.push({
