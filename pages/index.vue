@@ -42,7 +42,7 @@
                 <label for="editGambar">URL Gambar:</label>
                 <input type="text" id="editGambar" v-model="editFishData.gambar" required>
                 <button type="submit">Simpan</button>
-                <button @click="cancelEdit">Batal</button>
+                <button type="button" @click="cancelEdit">Batal</button>
               </form>
             </div>
           </li>
@@ -109,9 +109,11 @@ export default {
       this.editFishData = { ...this.fishList[index] };
     },
     updateFish() {
-      this.$set(this.fishList, this.editIndex, { ...this.editFishData });
-      this.editIndex = null;
-      this.saveFishList();
+      if (this.editIndex !== null) {
+        this.$set(this.fishList, this.editIndex, { ...this.editFishData });
+        this.editIndex = null;
+        this.saveFishList();
+      }
     },
     cancelEdit() {
       this.editIndex = null;
