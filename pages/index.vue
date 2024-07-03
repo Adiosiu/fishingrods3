@@ -28,7 +28,23 @@
             <img :src="fish.gambar" alt="Gambar Ikan" v-if="fish.gambar">
             <p><strong>Habitat:</strong> {{ fish.habitat }}</p>
             <p><strong>Umpan/Makanan:</strong> {{ fish.pakan }}</p>
+            <button @click="editFish(index)">Edit</button>
             <button @click="deleteFish(index)">Hapus</button>
+            <div v-if="editIndex === index">
+              <h3>Edit Ikan</h3>
+              <form @submit.prevent="updateFish">
+                <label for="editNama">Nama Ikan:</label>
+                <input type="text" id="editNama" v-model="editFishData.nama" required>
+                <label for="editHabitat">Habitat:</label>
+                <input type="text" id="editHabitat" v-model="editFishData.habitat" required>
+                <label for="editPakan">Umpan/Makanan:</label>
+                <input type="text" id="editPakan" v-model="editFishData.pakan" required>
+                <label for="editGambar">URL Gambar:</label>
+                <input type="text" id="editGambar" v-model="editFishData.gambar" required>
+                <button type="submit">Simpan</button>
+                <button @click="cancelEdit">Batal</button>
+              </form>
+            </div>
           </li>
         </ul>
       </div>
@@ -51,9 +67,16 @@ export default {
         nama: '',
         habitat: '',
         pakan: '',
-        gambar: '' // Menambahkan field untuk URL gambar
+        gambar: ''
       },
-      fishList: []
+      fishList: [],
+      editIndex: null, // Indeks ikan yang sedang diedit
+      editFishData: { // Data ikan yang sedang diedit
+        nama: '',
+        habitat: '',
+        pakan: '',
+        gambar: ''
+      }
     };
   },
   mounted() {
@@ -68,18 +91,30 @@ export default {
         nama: this.newFish.nama,
         habitat: this.newFish.habitat,
         pakan: this.newFish.pakan,
-        gambar: this.newFish.gambar // Menyimpan URL gambar
+        gambar: this.newFish.gambar
       });
       this.newFish.nama = '';
       this.newFish.habitat = '';
       this.newFish.pakan = '';
-      this.newFish.gambar = ''; // Mengosongkan field gambar setelah menambahkan ikan
+      this.newFish.gambar = '';
       this.showAddForm = false;
       this.saveFishList();
     },
     deleteFish(index) {
       this.fishList.splice(index, 1);
       this.saveFishList();
+    },
+    editFish(index) {
+      this.editIndex = index;
+      this.editFishData = { ...this.fishList[index] };
+    },
+    updateFish() {
+      this.$set(this.fishList, this.editIndex, { ...this.editFishData });
+      this.editIndex = null;
+      this.saveFishList();
+    },
+    cancelEdit() {
+      this.editIndex = null;
     },
     saveFishList() {
       localStorage.setItem('fishList', JSON.stringify(this.fishList));
@@ -89,7 +124,6 @@ export default {
       if (fishListData) {
         this.fishList = JSON.parse(fishListData);
       } else {
-        // Jika tidak ada data di Local Storage, tambahkan data default dengan gambar
         this.fishList = [
           { nama: 'Ikan Nemo', habitat: 'Lautan tropis', pakan: 'Plankton', gambar: 'https://link-to-nemo-image.com' },
           { nama: 'Ikan Koi', habitat: 'Kolam taman', pakan: 'Pelet ikan', gambar: 'https://link-to-koi-image.com' },
@@ -106,6 +140,6 @@ export default {
 img {
   width: 16em;
   height: 8em;
-  object-fit: cover; /* menjaga proporsi gambar */
+  object-fit: cover;
 }
 </style>
