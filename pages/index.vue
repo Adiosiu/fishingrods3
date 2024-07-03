@@ -104,7 +104,8 @@ export default {
 <style>
 /* CSS styling can be added here */
 img {
-  max-width: 100%;
-  height: auto;
+  width: 4em;
+  height: 8em;
+  object-fit: cover; /* menjaga proporsi gambar */
 }
 </style>
