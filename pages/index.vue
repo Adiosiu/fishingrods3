@@ -10,8 +10,6 @@
           <form @submit.prevent="addFish">
             <label for="nama">Nama Ikan:</label>
             <input type="text" id="nama" v-model="newFish.nama" required>
-            <label for="image">Gambar Ikan:</label>
-            <input type="file" id="image" @change="handleImageUpload" required>
             <label for="habitat">Habitat:</label>
             <input type="text" id="habitat" v-model="newFish.habitat" required>
             <label for="pakan">Umpan/Makanan:</label>
@@ -47,7 +45,6 @@
         showAddForm: false,
         newFish: {
           nama: '',
-          Image: '',
           habitat: '',
           pakan: ''
         },
@@ -65,7 +62,6 @@
       addFish() {
         this.fishList.push({
           nama: this.newFish.nama,
-          Image: this.handleImageUpload,
           habitat: this.newFish.habitat,
           pakan: this.newFish.pakan
         });
