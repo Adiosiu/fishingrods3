@@ -1,11 +1,10 @@
 <template>
   <div id="app">
     <header>
-      <div class="banner">
-        <img src="public\apalahbejir.jpg" alt="Fishing Banner" class="banner-img">
-        <h1>Fishing Rod</h1>
-      </div>
-    </header>
+  <div class="banner">
+    <h1>Fishing Rod</h1>
+  </div>
+</header>
     <main>
       <div v-if="showAddForm" class="form-container">
         <h2>Tambah Ikan Baru</h2>
@@ -183,34 +182,32 @@ body {
 
 header {
   position: relative;
+  width: 100%;
+  height: 300px; /* Atur tinggi header sesuai kebutuhan */
+  background-image: url('public\apalahbejir.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   text-align: center;
   margin-bottom: 20px;
 }
 
 .banner {
-  width: 100%;
   position: relative;
-  overflow: hidden;
-}
-
-.banner-img {
   width: 100%;
-  height: auto;
-  display: block;
-  object-fit: cover;
-  filter: brightness(50%);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 h1 {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   color: white;
   font-size: 2.5em;
   margin: 0;
   z-index: 1;
 }
+
 
 .fish-icon {
   width: 24px;
