@@ -184,7 +184,7 @@ header {
   position: relative;
   width: 100%;
   height: 300px; /* Atur tinggi header sesuai kebutuhan */
-  background-image: url('public\apalahbejir.jpg');
+  background-image: url('/public/banner.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
