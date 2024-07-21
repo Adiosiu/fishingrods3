@@ -188,8 +188,9 @@ header {
 }
 
 .banner {
+  width: 100%;
   position: relative;
-  display: inline-block;
+  overflow: hidden;
 }
 
 .banner-img {
@@ -267,14 +268,28 @@ button.btn + button.btn {
   margin-left: 10px;
 }
 
-.fish-list ul {
-  list-style-type: none;
-  padding: 0;
+.fish-list h2 {
+  display: flex;
+  align-items: center;
+  margin-top: 0;
+  color: #666;
 }
 
-.fish-item {
-  margin-bottom: 20px;
+.fish-icon {
+  width: 24px;
+  height: auto;
+  margin-right: 8px;
 }
+
+.fish-item h3 {
+  display: flex;
+  align-items: center;
+}
+
+.fish-item .fish-icon {
+  margin-right: 8px;
+}
+
 
 img {
   width: 100%;
