@@ -146,9 +146,9 @@ export default {
         this.fishList = JSON.parse(fishListData);
       } else {
         this.fishList = [
-          { nama: 'Ikan Nemo', habitat: 'Lautan tropis', pakan: 'Plankton', gambar: URL('public\ikannemo.jpeg') },
-          { nama: 'Ikan Koi', habitat: 'Kolam taman', pakan: 'Pelet ikan', gambar: URL('public\ikankoi.jpeg') },
-          { nama: 'Ikan Cupang', habitat: 'Air Tawar', pakan: 'Pelet, cacing', gambar: URL('public\ikan cupang.jpeg') }
+          { nama: 'Ikan Nemo', habitat: 'Lautan tropis', pakan: 'Plankton', gambar: 'public/ikannemo.jpeg' },
+          { nama: 'Ikan Koi', habitat: 'Kolam taman', pakan: 'Pelet ikan', gambar: 'public/ikankoi.jpeg' },
+          { nama: 'Ikan Cupang', habitat: 'Air Tawar', pakan: 'Pelet, cacing', gambar: 'public/ikan cupang.jpeg' }
         ];
         this.saveFishList();
       }
