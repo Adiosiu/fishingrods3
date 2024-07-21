@@ -56,3 +56,200 @@
     </main>
   </div>
 </template>
+
+<script>
+export default {
+  name: 'FishCard',
+  data() {
+    return {
+      showAddForm: false,
+      newFish: {
+        nama: '',
+        habitat: '',
+        pakan: '',
+        gambar: ''
+      },
+      fishList: [],
+      editIndex: null,
+      editFishData: {
+        nama: '',
+        habitat: '',
+        pakan: '',
+        gambar: ''
+      }
+    };
+  },
+  mounted() {
+    this.loadFishList();
+  },
+  methods: {
+    toggleAddForm() {
+      this.showAddForm = !this.showAddForm;
+    },
+    cancelAdd() {
+      this.showAddForm = false;
+      this.resetNewFish();
+    },
+    addFish() {
+      if (this.newFish.nama && this.newFish.habitat && this.newFish.pakan && this.newFish.gambar) {
+        this.fishList.push({
+          nama: this.newFish.nama,
+          habitat: this.newFish.habitat,
+          pakan: this.newFish.pakan,
+          gambar: this.newFish.gambar
+        });
+        this.saveFishList();
+        this.resetNewFish();
+        this.showAddForm = false;
+      } else {
+        alert('Silakan lengkapi semua informasi sebelum menambahkan ikan baru.');
+      }
+    },
+    editFish(index) {
+      this.editIndex = index;
+      this.editFishData = { ...this.fishList[index] };
+    },
+    updateFish() {
+      if (this.editIndex !== null) {
+        if (this.editFishData.nama && this.editFishData.habitat && this.editFishData.pakan && this.editFishData.gambar) {
+          this.$set(this.fishList, this.editIndex, { ...this.editFishData });
+          this.saveFishList();
+          this.editIndex = null;
+          this.editFishData = {
+            nama: '',
+            habitat: '',
+            pakan: '',
+            gambar: ''
+          };
+        } else {
+          alert('Silakan lengkapi semua informasi sebelum menyimpan perubahan.');
+        }
+      }
+    },
+    cancelEdit() {
+      this.editIndex = null;
+    },
+    deleteFish(index) {
+      this.fishList.splice(index, 1);
+      this.saveFishList();
+    },
+    resetNewFish() {
+      this.newFish.nama = '';
+      this.newFish.habitat = '';
+      this.newFish.pakan = '';
+      this.newFish.gambar = '';
+    },
+    saveFishList() {
+      localStorage.setItem('fishList', JSON.stringify(this.fishList));
+    },
+    loadFishList() {
+      const fishListData = localStorage.getItem('fishList');
+      if (fishListData) {
+        this.fishList = JSON.parse(fishListData);
+      } else {
+        this.fishList = [
+          { nama: 'Ikan Nemo', habitat: 'Lautan tropis', pakan: 'Plankton', gambar: '' },
+          { nama: 'Ikan Koi', habitat: 'Kolam taman', pakan: 'Pelet ikan', gambar: '' },
+          { nama: 'Ikan Cupang', habitat: 'Air Tawar', pakan: 'Pelet, cacing', gambar: ''}
+        ];
+      }
+    }
+  }
+};
+</script>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+#app {
+  max-width: 800px;
+  margin: 20px auto;
+  background: #fff;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 2em;
+  color: #333;
+}
+
+h2 {
+  margin-top: 0;
+  color: #666;
+}
+
+.form-container,
+.edit-form {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin: 10px 0 5px;
+}
+
+input[type="text"] {
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button.btn {
+  background-color: #28a745;
+  color: white;
+}
+
+button.btn-cancel {
+  background-color: #dc3545;
+  color: white;
+}
+
+button.btn-delete {
+  background-color: #dc3545;
+  color: white;
+}
+
+button.btn + button.btn {
+  margin-left: 10px;
+}
+
+.fish-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.fish-item {
+  margin-bottom: 20px;
+}
+
+img {
+  width: 100%;
+  height: auto;
+  max-width: 300px;
+  object-fit: cover;
+  display: block;
+  margin-bottom: 10px;
+}
+</style>
