@@ -36,6 +36,7 @@
         <p>Tidak ada data ikan.</p>
       </div>
 
+      <!-- Form Tambah Ikan Baru dan tombol untuk menampilkannya -->
       <div v-if="showAddForm">
         <h2>Tambah Ikan Baru</h2>
         <form @submit.prevent="addFish">
@@ -52,7 +53,10 @@
         </form>
       </div>
 
-      <button @click="toggleAddForm">Tambah Ikan Baru</button>
+      <!-- Tombol untuk menampilkan form tambah ikan baru -->
+      <button @click="toggleAddForm">
+        {{ showAddForm ? 'Batal Tambah Ikan' : 'Tambah Ikan Baru' }}
+      </button>
     </main>
   </div>
 </template>
