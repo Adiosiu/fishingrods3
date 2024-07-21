@@ -155,7 +155,7 @@ export default {
 <style>
 img {
   width: 16em;
-  height: 8em;
+  height: 9em;
   object-fit: cover;
 }
 </style>
