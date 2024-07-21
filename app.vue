@@ -2,7 +2,7 @@
   <div id="app">
     <header>
       <div class="banner">
-        <img src="D:\Fishing Rod\fishingrods3\public\banner.jpg" alt="Fishing Banner" class="banner-img">
+        <img src="/public/banner.jpg" alt="Fishing Banner" class="banner-img">
         <h1>Fishing Rod</h1>
       </div>
     </header>
