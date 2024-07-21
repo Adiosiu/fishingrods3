@@ -4,22 +4,6 @@
       <h1>Fishing Rod</h1>
     </header>
     <main>
-      <div v-if="showAddForm">
-        <h2>Tambah Ikan Baru</h2>
-        <form @submit.prevent="addFish">
-          <label for="nama">Nama Ikan:</label>
-          <input type="text" id="nama" v-model="newFish.nama" required>
-          <label for="habitat">Habitat:</label>
-          <input type="text" id="habitat" v-model="newFish.habitat" required>
-          <label for="pakan">Umpan/Makanan:</label>
-          <input type="text" id="pakan" v-model="newFish.pakan" required>
-          <label for="gambar">URL Gambar:</label>
-          <input type="text" id="gambar" v-model="newFish.gambar" required>
-          <button type="submit">Tambahkan</button>
-          <button type="button" @click="cancelAdd">Batal</button>
-        </form>
-      </div>
-
       <div v-if="fishList.length > 0">
         <h2>Daftar Ikan</h2>
         <ul>
@@ -50,6 +34,22 @@
       </div>
       <div v-else>
         <p>Tidak ada data ikan.</p>
+      </div>
+
+      <div v-if="showAddForm">
+        <h2>Tambah Ikan Baru</h2>
+        <form @submit.prevent="addFish">
+          <label for="nama">Nama Ikan:</label>
+          <input type="text" id="nama" v-model="newFish.nama" required>
+          <label for="habitat">Habitat:</label>
+          <input type="text" id="habitat" v-model="newFish.habitat" required>
+          <label for="pakan">Umpan/Makanan:</label>
+          <input type="text" id="pakan" v-model="newFish.pakan" required>
+          <label for="gambar">URL Gambar:</label>
+          <input type="text" id="gambar" v-model="newFish.gambar" required>
+          <button type="submit">Tambahkan</button>
+          <button type="button" @click="cancelAdd">Batal</button>
+        </form>
       </div>
 
       <button @click="toggleAddForm">Tambah Ikan Baru</button>
@@ -145,9 +145,9 @@ export default {
       if (fishListData) {
         this.fishList = JSON.parse(fishListData);
       } else {
-      // Inisialisasi dengan array kosong
-      this.fishList = [];
-      this.saveFishList(); // Simpan array kosong ke localStorage
+        // Inisialisasi dengan array kosong
+        this.fishList = [];
+        this.saveFishList(); // Simpan array kosong ke localStorage
       }
     }
   }
@@ -159,5 +159,9 @@ img {
   width: 16em;
   height: 8em;
   object-fit: cover;
+}
+
+button {
+  margin-top: 10px;
 }
 </style>
