@@ -145,12 +145,7 @@ export default {
       if (fishListData) {
         this.fishList = JSON.parse(fishListData);
       } else {
-        this.fishList = [
-          { nama: 'Ikan Nemo', habitat: 'Lautan tropis', pakan: 'Plankton', gambar: 'https://via.placeholder.com/150' },
-          { nama: 'Ikan Koi', habitat: 'Kolam taman', pakan: 'Pelet ikan', gambar: 'https://via.placeholder.com/150' },
-          { nama: 'Ikan Cupang', habitat: 'Air Tawar', pakan: 'Pelet, cacing', gambar: 'https://via.placeholder.com/150' }
-        ];
-        this.saveFishList();
+        this.fishList = [];
       }
     }
   }
