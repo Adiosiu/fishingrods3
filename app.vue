@@ -1,27 +1,9 @@
 <template>
   <div id="app">
     <header>
-  <div class="banner">
-    <h1>Fishing Rod</h1>
-  </div>
-</header>
+      <h1>Fishing Rod</h1>
+    </header>
     <main>
-      <div v-if="showAddForm" class="form-container">
-        <h2>Tambah Ikan Baru</h2>
-        <form @submit.prevent="addFish">
-          <label for="nama">Nama Ikan:</label>
-          <input type="text" id="nama" v-model="newFish.nama" required>
-          <label for="habitat">Habitat:</label>
-          <input type="text" id="habitat" v-model="newFish.habitat" required>
-          <label for="pakan">Umpan/Makanan:</label>
-          <input type="text" id="pakan" v-model="newFish.pakan" required>
-          <label for="gambar">URL Gambar:</label>
-          <input type="text" id="gambar" v-model="newFish.gambar" required>
-          <button type="submit" class="btn">Tambahkan</button>
-          <button type="button" class="btn btn-cancel" @click="cancelAdd">Batal</button>
-        </form>
-      </div>
-
       <div v-if="fishList.length > 0" class="fish-list">
         <h2><img src="public/fishicon.png" alt="Fish Icon" class="fish-icon"> Daftar Ikan</h2>
         <ul>
@@ -54,11 +36,30 @@
         <p>Tidak ada data ikan.</p>
       </div>
 
-      <button class="btn" @click="toggleAddForm">Tambah Ikan Baru</button>
+      <!-- Form Tambah Ikan Baru dan tombol untuk menampilkannya -->
+      <div v-if="showAddForm">
+        <h2>Tambah Ikan Baru</h2>
+        <form @submit.prevent="addFish">
+          <label for="nama">Nama Ikan:</label>
+          <input type="text" id="nama" v-model="newFish.nama" required>
+          <label for="habitat">Habitat:</label>
+          <input type="text" id="habitat" v-model="newFish.habitat" required>
+          <label for="pakan">Umpan/Makanan:</label>
+          <input type="text" id="pakan" v-model="newFish.pakan" required>
+          <label for="gambar">URL Gambar:</label>
+          <input type="text" id="gambar" v-model="newFish.gambar" required>
+          <button type="submit" class="btn">Tambahkan</button>
+          <button type="button" class="btn btn-cancel" @click="cancelAdd">Batal</button>
+        </form>
+      </div>
+
+      <!-- Tombol untuk menampilkan form tambah ikan baru -->
+      <button @click="toggleAddForm">
+        {{ showAddForm ? 'Batal Tambah Ikan' : 'Tambah Ikan Baru' }}
+      </button>
     </main>
   </div>
 </template>
-
 
 <script>
 export default {
@@ -296,4 +297,11 @@ img {
   display: block;
   margin-bottom: 10px;
 }
+
+.edit-form {
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
 </style>
