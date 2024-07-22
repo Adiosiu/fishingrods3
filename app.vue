@@ -5,10 +5,10 @@
     </header>
     <main>
       <div v-if="fishList.length > 0" class="fish-list">
-        <h2><img :src="require('@/assets/fishicon.png')" alt="Fish Icon" class="fish-icon"> Daftar Ikan</h2>
+        <h2><img src="public/fishicon.png" alt="Fish Icon" class="fish-icon"> Daftar Ikan</h2>
         <ul>
           <li v-for="(fish, index) in fishList" :key="index" class="fish-item">
-            <h3><img :src="require('@/assets/fishicon.png')" alt="Fish Icon" class="fish-icon"> {{ fish.nama }}</h3>
+            <h3><img src="public/fishicon.png" alt="Fish Icon" class="fish-icon"> {{ fish.nama }}</h3>
             <img :src="fish.gambar" alt="Gambar Ikan" v-if="fish.gambar">
             <p><strong>Habitat:</strong> {{ fish.habitat }}</p>
             <p><strong>Umpan/Makanan:</strong> {{ fish.pakan }}</p>
@@ -96,22 +96,15 @@ export default {
     },
     addFish() {
       if (this.newFish.nama && this.newFish.habitat && this.newFish.pakan && this.newFish.gambar) {
-        const img = new Image();
-        img.onload = () => {
-          this.fishList.push({
-            nama: this.newFish.nama,
-            habitat: this.newFish.habitat,
-            pakan: this.newFish.pakan,
-            gambar: this.newFish.gambar
-          });
-          this.saveFishList();
-          this.resetNewFish();
-          this.showAddForm = false;
-        };
-        img.onerror = () => {
-          alert('URL gambar tidak valid. Silakan coba lagi dengan URL yang benar.');
-        };
-        img.src = this.newFish.gambar;
+        this.fishList.push({
+          nama: this.newFish.nama,
+          habitat: this.newFish.habitat,
+          pakan: this.newFish.pakan,
+          gambar: this.newFish.gambar
+        });
+        this.saveFishList();
+        this.resetNewFish();
+        this.showAddForm = false;
       } else {
         alert('Silakan lengkapi semua informasi sebelum menambahkan ikan baru.');
       }
@@ -120,11 +113,10 @@ export default {
       this.editIndex = index;
       this.editFishData = { ...this.fishList[index] };
     },
-    updateFish(index) {
-      if (this.editFishData.nama && this.editFishData.habitat && this.editFishData.pakan && this.editFishData.gambar) {
-        const img = new Image();
-        img.onload = () => {
-          this.$set(this.fishList, index, { ...this.editFishData });
+    updateFish() {
+      if (this.editIndex !== null) {
+        if (this.editFishData.nama && this.editFishData.habitat && this.editFishData.pakan && this.editFishData.gambar) {
+          this.$set(this.fishList, this.editIndex, { ...this.editFishData });
           this.saveFishList();
           this.editIndex = null;
           this.editFishData = {
@@ -133,13 +125,9 @@ export default {
             pakan: '',
             gambar: ''
           };
-        };
-        img.onerror = () => {
-          alert('URL gambar tidak valid. Silakan coba lagi dengan URL yang benar.');
-        };
-        img.src = this.editFishData.gambar;
-      } else {
-        alert('Silakan lengkapi semua informasi sebelum menyimpan perubahan.');
+        } else {
+          alert('Silakan lengkapi semua informasi sebelum menyimpan perubahan.');
+        }
       }
     },
     cancelEdit() {
@@ -164,9 +152,9 @@ export default {
         this.fishList = JSON.parse(fishListData);
       } else {
         this.fishList = [
-          { nama: 'Ikan Nemo', habitat: 'Lautan tropis', pakan: 'Plankton', gambar: require('@/assets/ikannemo.jpeg') },
-          { nama: 'Ikan Koi', habitat: 'Kolam taman', pakan: 'Pelet ikan', gambar: require('@/assets/ikankoi.jpeg') },
-          { nama: 'Ikan Cupang', habitat: 'Air Tawar', pakan: 'Pelet, cacing', gambar: require('@/assets/ikancupang.jpeg')}
+          { nama: 'Ikan Nemo', habitat: 'Lautan tropis', pakan: 'Plankton', gambar: '/ikannemo.jpeg' },
+          { nama: 'Ikan Koi', habitat: 'Kolam taman', pakan: 'Pelet ikan', gambar: '/ikankoi.jpeg' },
+          { nama: 'Ikan Cupang', habitat: 'Air Tawar', pakan: 'Pelet, cacing', gambar: '/ikan cupang.jpeg'}
         ];
       }
     }
@@ -197,7 +185,7 @@ header {
   position: relative;
   width: 100%;
   height: 300px; /* Atur tinggi header sesuai kebutuhan */
-  background-image: url('@/assets/banner.jpg');
+  background-image: url('/public/banner.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
