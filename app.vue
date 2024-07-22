@@ -5,10 +5,10 @@
     </header>
     <main>
       <div v-if="fishList.length > 0" class="fish-list">
-        <h2><img :src="require('@/assets/fishicon.png')" alt="Fish Icon" class="fish-icon"> Daftar Ikan</h2>
+        <h2><img src="public/fishicon.png" alt="Fish Icon" class="fish-icon"> Daftar Ikan</h2>
         <ul>
           <li v-for="(fish, index) in fishList" :key="index" class="fish-item">
-            <h3><img :src="require('@/assets/fishicon.png')" alt="Fish Icon" class="fish-icon"> {{ fish.nama }}</h3>
+            <h3><img src="public/fishicon.png" alt="Fish Icon" class="fish-icon"> {{ fish.nama }}</h3>
             <img :src="fish.gambar" alt="Gambar Ikan" v-if="fish.gambar">
             <p><strong>Habitat:</strong> {{ fish.habitat }}</p>
             <p><strong>Umpan/Makanan:</strong> {{ fish.pakan }}</p>
